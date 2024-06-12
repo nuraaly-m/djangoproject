@@ -1,0 +1,10 @@
+ <h1>название - {{ book_id.title }}</h1>
+ <p>автор - {{ book_id.author }}</p>
+ <p>цена - {{ book_id.price }}</p>
+ <img src="{{ book_id.image.url }}" width='350' height=" 250">
+ <p>описание - {{ book_id.description }}</p>
+ <data>дата создания поста - {{ book_id.created_at }}</data>
+ <br><br>
+ <a href="{{ book_id.video }}">посмотреть фильм</a>
+ <br><br>
+ <data>дата обновления поста - {{book_id.updated_at }}</data>
