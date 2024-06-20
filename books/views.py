@@ -3,6 +3,45 @@ from django.http import HttpResponse
 from datetime import datetime
 import random
 from books.models import Books
+from . import forms
+
+
+def edit_book_view(request, id):
+    book_id = get_object_or_404(Books, id=id)
+    if request.method == 'POST':
+        form = forms.BookForm(request.POST, instance=book_id)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('<h3>Book successfully updated!</h3>'
+                                '<a href="/books/">На список книг</a>')
+    else:
+        form = forms.BookForm(instance=book_id)
+    return render(request, template_name='blog/edit_book.html',
+                  context={
+                      'form': form,
+                      'book_id': book_id
+                  })
+
+
+def drop_book_view(request, id):
+    book_id = get_object_or_404(Books, id=id)
+    book_id.delete()
+    return HttpResponse('Book deleted <a href="/books/">На список книг</a>')
+
+
+def create_book_view(request):
+    if request.method == "POST":
+        form = forms.BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('<h3>Book successfully created!</h3>'
+                                '<a href="/books/">На список книг</a>')
+    else:
+        form = forms.BookForm()
+    return render(request, template_name='blog/create_book.html',
+                  context={'form': form})
+
+
 
 
 def all_books(request):

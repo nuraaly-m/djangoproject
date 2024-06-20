@@ -1,21 +1,27 @@
 {% load static %}
 {% include "../header.html" %}
-<link rel="stylesheet" href="{% static 'css/book_list.css' %} ">
+<link rel="stylesheet" href="{% static 'css/book_list.css' %}  ">
 <center>
 
-    <h1 class="h1_class ">список книг</h1>
+    <h1 class="h1_class">Список книг</h1>
+    <button type="button" class="btn btn-secondary">
+        <a href="/create_book/" class="add_emp">Добавить книгу</a>
+    </button>
+    <br><br>
 
     {% for i in books %}
     <div class="card" style="width: 18rem;">
-      <img src="{{ i.image.url }}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{ i.title }}</h5>
-        <p class="card-text">{{ i.genre }}</p>
-        <a href="/books/{{ i.id }}/ " class="btn btn-primary">Подробнее</a>
-      </div>
+        <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ i.title }}</h5>
+            <p class="card-text">{{ i.genre }}</p>
+            <a href="/books/{{ i.id }}/" class="btn btn-primary">Подробнее</a>
+            <a href="/books/{{ i.id }}/delete/" class="btn btn-primary">Удалить</a>
+            <br><br>
+            <a href="/books/{{ i.id }}/update/" class="btn btn-primary">Редактировать</a>
+        </div>
     </div>
     <br>
     {% endfor %}
 </center>
-
 {% include "../footer.html" %}
