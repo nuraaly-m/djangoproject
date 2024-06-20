@@ -7,11 +7,12 @@ urlpatterns = [
     path('teens_books/', views.for_teens_view),
     path('adults_books/', views.for_adults_view),
 
-    path('books/', views.books_list_view),
-    path('books/<int:id>/', views.books_detail_view),
-    path('books/<int:id>/delete/', views.drop_book_view),
-    path('books/<int:id>/update/', views.edit_book_view),
-    path('create_book/', views.create_book_view),
+    path('books/', views.BooksListView.as_view()),
+    path('books/<int:id>/', views.BooksDetailView.as_view()),
+    path('books/<int:id>/delete/', views.BookDeleteView.as_view()),
+    path('books/<int:id>/update/', views.EditBookView.as_view()),
+    path('create_book/', views.CreateBookView.as_view()),
+    path('search/', views.SearchListView.as_view(), name='search'),
 
     path('bio/', views.bio_view),
     path('hobby/', views.hobby_view),
