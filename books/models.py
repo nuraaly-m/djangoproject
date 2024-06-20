@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+
+
+    def __str__(self):
+        return self.name
+
+
 class Books(models.Model):
 
     GENRE_BOOKS = (
@@ -20,6 +28,7 @@ class Books(models.Model):
     price = models.PositiveIntegerField(verbose_name='укажите цену книги')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    tag = models.ManyToManyField(Tag)
 
 
     def __str__(self):
@@ -29,3 +38,14 @@ class Books(models.Model):
     class Meta:
         verbose_name = 'книга'
         verbose_name_plural = 'книги'
+
+
+class ReviewBooks(models.Model):
+    book = models.ForeignKey(Books, on_delete=models.CASCADE,
+                                 related_name='review_books')
+    text = models.TextField()
+    mark = models.IntegerField(default=5)
+
+
+    def __str__(self):
+        return f'{self.book}--{self.mark}'

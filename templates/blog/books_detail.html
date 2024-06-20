@@ -1,10 +1,25 @@
- <h1>название - {{ book_id.title }}</h1>
- <p>автор - {{ book_id.author }}</p>
- <p>цена - {{ book_id.price }}</p>
- <img src="{{ book_id.image.url }}" width='350' height=" 250">
- <p>описание - {{ book_id.description }}</p>
- <data>дата создания поста - {{ book_id.created_at }}</data>
- <br><br>
- <a href="{{ book_id.video }}">посмотреть фильм</a>
- <br><br>
- <data>дата обновления поста - {{book_id.updated_at }}</data>
+ {% include "../header.html" %}
+<center>
+<div class="card" style="width: 18rem;">
+  <img src="{{ book_id.image.url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">{{ book_id.title }}</p>
+    <p class="card-text">{{ book_id.author }}</p>
+    <p class="card-text">{{ book_id.price }}</p>
+    <p class="card-text">{{ book_id.description }}</p>
+    <p class="card-text">{{ book_id.created_at }}</p>
+     <a href="{{ book_id.video }}">посмотреть фильм</a>
+  </div>
+</div>
+
+    <ul>
+        {% for i in book_id.review_books.all %}
+        <li>
+            <h1>{{ i.text }}</h1>
+            <p>{{ i.mark }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+ </center>
+ {% include "../footer.html" %}

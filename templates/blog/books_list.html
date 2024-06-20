@@ -1,11 +1,21 @@
-<h1>список книг</h1>
-<hr>
+{% load static %}
+{% include "../header.html" %}
+<link rel="stylesheet" href="{% static 'css/book_list.css' %} ">
+<center>
+
+    <h1 class="h1_class ">список книг</h1>
+
     {% for i in books %}
+    <div class="card" style="width: 18rem;">
+      <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ i.title }}</h5>
+        <p class="card-text">{{ i.genre }}</p>
+        <a href="/books/{{ i.id }}/ " class="btn btn-primary">Подробнее</a>
+      </div>
+    </div>
     <br>
-    <img src="{{ i.image.url }}" width='350' height=" 250">
-    <h2>название - {{ i.title }}</h2>
-    <p>жанр - {{ i.genre }}</p>
-    <a href="/books/{{ i.id }}/ ">Подробнее</a>
-    <br><br>
     {% endfor %}
-<hr>
+</center>
+
+{% include "../footer.html" %}

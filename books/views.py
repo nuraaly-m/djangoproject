@@ -5,6 +5,30 @@ import random
 from books.models import Books
 
 
+def all_books(request):
+    if request.method == 'GET':
+        books = Books.objects.filter().order_by('-id')
+        return render(request, template_name='books/all_books.html',
+                      context={
+                          'books': books})
+
+
+def for_adults_view(request):
+    if request.method == 'GET':
+        adults_book = Books.objects.filter(tags__name='взрослые').order_by('-id')
+        return render(request, template_name='books/for_adults_view.html',
+                      context={
+                          'adults_book': adults_book})
+
+
+def for_teens_view(request):
+    if request.method == 'GET':
+        teens_book = Books.objects.filter(tags__name='подростки').order_by('-id')
+        return render(request, template_name='books/for_teens_view.html',
+                      context={
+                          'teens_book': teens_book})
+
+
 def books_list_view(request):
     if request.method == 'GET':
         query = Books.objects.filter().order_by('-id')
