@@ -7,10 +7,7 @@ from django.dispatch import receiver
 
 class CustomUser(User):
 
-    GENDER = (
-        ('Male', 'Male'),
-        ('Female', 'Female')
-    )
+    GENDER = (("Male", "Male"), ("Female", "Female"))
 
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
@@ -26,20 +23,19 @@ class CustomUser(User):
     level = models.CharField(max_length=100, default="junior")
 
 
-
 @receiver(post_save, sender=CustomUser)
 def set_level(sender, instance, created, **kwargs):
     if created:
-        print('Сигнал обработан успешно пользователь зарегистрировался')
+        print("Сигнал обработан успешно пользователь зарегистрировался")
         experience = instance.experience
         if experience < 1:
-            instance.level = 'junior'
+            instance.level = "junior"
         elif experience >= 1 and experience <= 3:
-            instance.level = 'junior'
+            instance.level = "junior"
         elif experience >= 4 and experience <= 6:
-            instance.level = 'middle'
+            instance.level = "middle"
         elif experience >= 7 and experience <= 15:
-            instance.level = 'senior'
+            instance.level = "senior"
         else:
-            instance.level = 'Уровень не определен'
+            instance.level = "Уровень не определен"
         instance.save()

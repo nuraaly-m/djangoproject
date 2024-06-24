@@ -4,11 +4,7 @@ from . import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-GENDER = (
-    ('Male', 'Male'),
-    ('Female', 'Female')
-)
-
+GENDER = (("Male", "Male"), ("Female", "Female"))
 
 
 class CustomRegistrationForm(UserCreationForm):
@@ -41,10 +37,9 @@ class CustomRegistrationForm(UserCreationForm):
             "favorite_genre",
         )
 
-
     def save(self, commit=True):
         user = super(CustomRegistrationForm, self).save(commit=True)
-        user.email = self.cleaned_data['email']
+        user.email = self.cleaned_data["email"]
         if commit:
             user.save()
         return user
@@ -53,16 +48,16 @@ class CustomRegistrationForm(UserCreationForm):
 @receiver(post_save, sender=models.CustomUser)
 def set_level(sender, instance, created, **kwargs):
     if created:
-        print('Сигнал обработан успешно пользователь зарегистрировался')
+        print("Сигнал обработан успешно пользователь зарегистрировался")
         experience = instance.experience
         if experience < 1:
-            instance.level = 'junior'
+            instance.level = "junior"
         elif experience >= 1 and experience <= 3:
-            instance.level = 'junior'
+            instance.level = "junior"
         elif experience >= 4 and experience <= 6:
-            instance.level = 'middle'
+            instance.level = "middle"
         elif experience >= 7 and experience <= 15:
-            instance.level = 'senior'
+            instance.level = "senior"
         else:
-            instance.level = 'уровень не определен'
+            instance.level = "уровень не определен"
         instance.save()

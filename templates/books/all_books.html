@@ -1,22 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <a href="/teens_books/">для подростков</a>
-    <a href="/adults_books/">для взрослых</a>
-<ul>
-    {% for i in books %}
-    <li>
-        <h1>{{ i.title }}</h1>
-        {% for tag in i.tags.all %}
-        <p>#{{ tag.name }}</p>
-        {% endfor %}
-    </li>
+<!--{% include "../header.html" %}-->
+<!--    <a href="/teens_books/">для подростков</a>-->
+<!--    <a href="/adults_books/">для взрослых</a>-->
+<!--<ul>-->
+<!--    {% for i in books %}-->
+<!--    <li>-->
+<!--        <h1>{{ i.title }}</h1>-->
+<!--        {% for tag in i.tags.all %}-->
+<!--        <p>#{{ tag.name }}</p>-->
+<!--        {% endfor %}-->
+<!--    </li>-->
 
-    {% endfor %}
-</ul>
-</body>
-</html>
+<!--    {% endfor %}-->
+<!--</ul>-->
+<!--{% include "../footer.html" %}-->
+
+{% load static %}
+{% include "../header.html" %}
+<link rel="stylesheet" href="{% static 'css/all_books.css' %}  ">
+     <div class="container">
+        <div class="buttons">
+            <a href="/teens_books/" class="btn">для подростков</a>
+            <a href="adults_books/" class="btn">для взрослых</a>
+        </div>
+        <ul class="book-list">
+            {% for i in books %}
+            <li class="book-item">
+                <h1>{{ i.title }}</h1>
+                {% for tag in i.tags.all %}
+                <p>#{{tag.name}}</p>
+                {% endfor %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
